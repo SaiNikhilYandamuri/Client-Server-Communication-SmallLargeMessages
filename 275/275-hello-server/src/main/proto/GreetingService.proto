@@ -9,7 +9,25 @@ package com.example.CMPE275;
         string name = 1;
 
         // This defines a strongly typed list of String
-        repeated string hobbies = 2;
+        // repeated string hobbies = 2;
+
+        string mesonet = 2;
+
+        float lat = 3;
+
+        float lon = 4;
+
+        float elevation = 5;
+
+        float agl = 6;
+
+        string cit = 7;
+
+        string state = 8;
+
+        string country = 9;
+
+        bool active = 10;
 
         // There are many more basics types, like Enum, Map
         // See https://developers.google.com/protocol-buffers/docs/proto3
