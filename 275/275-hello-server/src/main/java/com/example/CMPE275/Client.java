@@ -17,10 +17,7 @@ public class Client {
         GreetingServiceGrpc.GreetingServiceBlockingStub stub = GreetingServiceGrpc.newBlockingStub(channel);
         GreetingServiceOuterClass.HelloRequest request =
                 GreetingServiceOuterClass.HelloRequest.newBuilder()
-                        .setName("Ray")
-                        .setActive(false)
-                        .setCit("San Jose")
-                        .setState("California")
+                        .setCity("San Jose")
                         .build();
 
         // Finally, make the call using the stub
