@@ -30,14 +30,18 @@ public class Client {
 //
 //        // A Channel should be shutdown before stopping the process.
 //        channel.shutdownNow();
-        System.out.println("Awesome");
-        LargeMessageServiceGrpc.LargeMessageServiceBlockingStub stub = LargeMessageServiceGrpc.newBlockingStub(channel);
-        System.out.println("Awesome123");
-        GreetingServiceOuterClass.HelloRequest request = GreetingServiceOuterClass.HelloRequest.newBuilder().setCity("C7959").build();
-        System.out.println("Awesome456");
-        GreetingServiceOuterClass.Responses responses = stub.largeMessage(request);
-        System.out.println("Awesome789");
-        System.out.println(responses.getResponseList());
+        //for(int i=0;i<10;i++){
+            System.out.println("Awesome");
+            LargeMessageServiceGrpc.LargeMessageServiceBlockingStub stub = LargeMessageServiceGrpc.newBlockingStub(channel);
+            System.out.println("Awesome123");
+            GreetingServiceOuterClass.HelloRequest request = GreetingServiceOuterClass.HelloRequest.newBuilder().setCity("C7959").build();
+            System.out.println("Awesome456");
+            GreetingServiceOuterClass.Responses responses = stub.largeMessage(request);
+            System.out.println("Awesome789");
+            System.out.println(responses.getResponseCount());
+            //channel.shutdownNow();
+        //}
         channel.shutdownNow();
+
     }
 }
