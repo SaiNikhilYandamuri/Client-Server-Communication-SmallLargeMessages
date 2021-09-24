@@ -6,6 +6,7 @@ import java.awt.Rectangle;
 import java.io.File;
 import java.io.FileFilter;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -23,7 +24,9 @@ public class Reader {
         Date startDate = null;
         Date endDate = null;
         Rectangle region = null;
-        Set<String> stationIDs = null;
+        Set<String> stationIDs = new HashSet<>();
+        stationIDs.add("C7959");
+        stationIDs.add("MEGT2");
         long startTime = System.currentTimeMillis();
         try {
             Catalog cat = new Catalog();
@@ -52,11 +55,11 @@ public class Reader {
                 // now do something with the data
                 // 1. send to the cluster or cloud
 
-//				for (MesonetData d : data) {
-//					// TODO do something other than print!
-//					System.out.println("Obs: " + d.getStationID() + " T = " + d.getTemperature() + ", WS = "
-//							+ d.getWindSpeed() + ", WD = " + d.getWindDir() + ", RH = " + d.getRelHumidity());
-//				}
+				for (MesonetData d : data) {
+					// TODO do something other than print!
+					System.out.println("Obs: " + d.getStationID() + " T = " + d.getTemperature() + ", WS = "
+							+ d.getWindSpeed() + ", WD = " + d.getWindDir() + ", RH = " + d.getRelHumidity());
+				}
             } else {
                 FileFilter filter = new FileFilter() {
                     public boolean accept(File pathname) {
