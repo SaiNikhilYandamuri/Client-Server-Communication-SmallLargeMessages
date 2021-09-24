@@ -13,7 +13,9 @@ package com.example.CMPE275;
         // See https://developers.google.com/protocol-buffers/docs/proto3
         // for more information.
         }
-
+        message Responses {
+                repeated HelloResponse response = 1;
+        }
         message HelloResponse {
                 string id = 1;
                 string name = 2;
@@ -24,4 +26,8 @@ package com.example.CMPE275;
         service GreetingService {
         // Define a RPC operation
         rpc greeting(HelloRequest) returns (HelloResponse);
+        }
+
+        service LargeMessageService {
+                rpc largeMessage(HelloRequest) returns (Responses);
         }
