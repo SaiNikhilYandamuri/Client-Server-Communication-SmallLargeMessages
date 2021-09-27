@@ -7,6 +7,7 @@ import com.example.reader.Reader;
 import com.example.csvparser.CSVParser;
 
 import java.util.List;
+import java.util.concurrent.Executors;
 
 /**
  * Hello world!
@@ -18,7 +19,7 @@ public class App
     public static void main( String[] args ) throws Exception
     {
         // Create a new server to listen on port 8080
-        Server server = ServerBuilder.forPort(8080)
+        Server server = ServerBuilder.forPort(8080).executor(Executors.newFixedThreadPool(16))
                 .addService(new HelloServiceI())
                 .build();
 

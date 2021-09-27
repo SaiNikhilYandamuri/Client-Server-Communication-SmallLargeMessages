@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 public class HelloServiceI extends LargeMessageServiceGrpc.LargeMessageServiceImplBase{
-    Queue<GreetingServiceOuterClass.HelloRequest> queue = new LinkedList<>();
+    //Queue<GreetingServiceOuterClass.HelloRequest> queue = new LinkedList<>();
 //    @Override
 //    public void greeting(GreetingServiceOuterClass.HelloRequest request,
 //                         StreamObserver<GreetingServiceOuterClass.HelloResponse> responseObserver) {
@@ -42,30 +42,30 @@ public class HelloServiceI extends LargeMessageServiceGrpc.LargeMessageServiceIm
     public void largeMessage(GreetingServiceOuterClass.HelloRequest request,
                              StreamObserver<GreetingServiceOuterClass.Responses> responseObserver) {
         System.out.println(request);
-        queue.add(request);
-        while(queue.size()>0){
-            try{
-                TimeUnit.SECONDS.sleep(5);
-            }catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            System.out.println("Queue Size = " + queue.size());
+        //queue.add(request);
+        //while(queue.size()>0){
+//            try{
+//                //TimeUnit.SECONDS.sleep(5);
+//            }catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+            //System.out.println("Queue Size = " + queue.size());
             CSVParser csvParser = new CSVParser();
             List<GreetingServiceOuterClass.HelloResponse> superList = csvParser.processInputFile("C:\\Users\\nikhi\\OneDrive\\Desktop\\Fall'21\\275\\lab-g01\\reader\\catalog.csv");
             System.out.println(superList.size());
             try {
-                System.out.println(queue.poll().getCity());
+                //System.out.println(queue.poll().getCity());
             }catch (Exception e){
                 e.printStackTrace();
             }
 
-            GreetingServiceOuterClass.Responses responses = GreetingServiceOuterClass.Responses.newBuilder().addAllResponse(superList.stream().limit(100).collect(Collectors.toList())).build();
+            GreetingServiceOuterClass.Responses responses = GreetingServiceOuterClass.Responses.newBuilder().addAllResponse(superList.stream().collect(Collectors.toList())).build();
 
             System.out.println("Super");
             responseObserver.onNext(responses);
             responseObserver.onCompleted();
-            System.out.println("Queue Size = " + queue.size());
-        }
+            //System.out.println("Queue Size = " + queue.size());
+        //}
 
     }
 
