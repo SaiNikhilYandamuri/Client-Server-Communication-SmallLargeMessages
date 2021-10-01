@@ -20,23 +20,20 @@ public class App
     {
         // Create a new server to listen on port 8080
         System.out.println("Server starting at port "+ args[0]);
-        Server server = ServerBuilder.forPort(Integer.parseInt(args[0])).executor(Executors.newFixedThreadPool(16))
+        Server server = ServerBuilder.forPort(Integer.parseInt(args[0])).executor(Executors.newFixedThreadPool(100))
                 .addService(new HelloServiceI())
                 .build();
 
         // Start the server
         server.start();
         Reader reader = new Reader();
-        String[] args1 = {};
+        String[] args1 = {args[0]};
         reader.readFile(args1);
 
 
-        // Server threads are running in the background.
-//        System.out.println("Server started");
-//        CSVParser csvParser = new CSVParser();
-//        List<Station> superList = csvParser.processInputFile("C:\\Users\\nikhi\\OneDrive\\Desktop\\Fall'21\\275\\lab-g01\\reader\\catalog.csv");
-//        System.out.println(superList.size());
-        // Don't exit the main thread. Wait until server is terminated.
+
         server.awaitTermination();
     }
+
+
 }

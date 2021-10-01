@@ -51,7 +51,8 @@ public class HelloServiceI extends LargeMessageServiceGrpc.LargeMessageServiceIm
 //            }
             //System.out.println("Queue Size = " + queue.size());
             CSVParser csvParser = new CSVParser();
-            List<GreetingServiceOuterClass.HelloResponse> superList = csvParser.processInputFile("C:\\275_lab1\\CMPE275Lab1\\275\\275-hello-server\\catalog.csv");
+            //List<GreetingServiceOuterClass.HelloResponse> superList = csvParser.processInputFile("C:\\275_lab1\\CMPE275Lab1\\275\\275-hello-server\\catalog.csv");
+        List<GreetingServiceOuterClass.HelloResponse> superList = csvParser.processInputFile("C:\\Users\\nikhi\\OneDrive\\Desktop\\Fall'21\\275\\lab-g01\\reader\\catalog.csv");
             System.out.println(superList.size());
             try {
                 //System.out.println(queue.poll().getCity());
