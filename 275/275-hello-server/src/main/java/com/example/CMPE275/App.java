@@ -19,7 +19,8 @@ public class App
     public static void main( String[] args ) throws Exception
     {
         // Create a new server to listen on port 8080
-        Server server = ServerBuilder.forPort(8080).executor(Executors.newFixedThreadPool(16))
+        System.out.println("Server starting at port "+ args[0]);
+        Server server = ServerBuilder.forPort(Integer.parseInt(args[0])).executor(Executors.newFixedThreadPool(16))
                 .addService(new HelloServiceI())
                 .build();
 

@@ -18,9 +18,9 @@ public class Reader {
 
     public final void readFile(String[] args){
 
-        File dataSource = new File("C:\\Users\\nikhi\\OneDrive\\Desktop\\Fall'21\\275\\lab-g01\\data\\0201\\20120201_0100\\20120201_0100");
-        File catSource = new File("C:\\Users\\nikhi\\OneDrive\\Desktop\\Fall'21\\275\\lab-g01\\reader\\catalog.csv");
-        File outputSource = new File("C:\\Users\\nikhi\\OneDrive\\Desktop\\Fall'21\\275\\lab-g01\\output.txt");
+        File dataSource = new File("C:\\gash\\datasets\\mesonet\\9-days\\20120201\\20120201_0100\\20120201_0100");
+        File catSource = new File("C:\\275_lab1\\CMPE275Lab1\\275\\275-hello-server\\catalog.csv");
+        File outputSource = new File("C:\\275_lab1\\CMPE275Lab1\\275\\275-hello-server\\output.txt");
         Date startDate = null;
         Date endDate = null;
         Rectangle region = null;
