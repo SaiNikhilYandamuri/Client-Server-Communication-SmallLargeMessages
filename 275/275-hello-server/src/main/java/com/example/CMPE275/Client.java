@@ -35,7 +35,7 @@ public class Client {
     public static void createClient(LargeMessageServiceGrpc.LargeMessageServiceBlockingStub stub, AtomicReference<Throwable> errors){
         GreetingServiceOuterClass.HelloRequest request = GreetingServiceOuterClass.HelloRequest.newBuilder().setCity("C7959").build();
         GreetingServiceOuterClass.Responses responses = stub.largeMessage(request);
-        System.out.println(responses.getResponseList()+"-----------");
+        responses.getResponseList();
     }
     public static void createClient(LargeMessageServiceGrpc.LargeMessageServiceFutureStub stub,AtomicReference<Throwable> errors) throws InterruptedException {
 
@@ -62,7 +62,7 @@ public class Client {
                     errors.compareAndSet(null, new RuntimeException("Invalid Response"));
                 }
                 synchronized (result){
-                    System.out.println(result.getResponseList());
+                    result.getResponseList();
                 }
 
                 while(!responses.isDone()){
@@ -79,7 +79,7 @@ public class Client {
         }, MoreExecutors.directExecutor());
 
         while(!responses.isDone()){
-            System.out.println("waiting...");
+            //System.out.println("waiting...");
 //            Thread.sleep(2000);
 
         }
@@ -122,6 +122,7 @@ public class Client {
 //            System.out.println(stubs.get(j));
 //        }
         LargeMessageServiceGrpc.LargeMessageServiceFutureStub stub = LargeMessageServiceGrpc.newFutureStub(channel);
+        // LargeMessageServiceGrpc.LargeMessageServiceBlockingStub stub = LargeMessageServiceGrpc.newBlockingStub(channel);
         Instant start = Instant.now();
         long startTime = System.currentTimeMillis();
         for(int i=0;i<10;i++){//System.out.println(i%2);

@@ -5,6 +5,7 @@ import com.example.reader.Station;
 import io.grpc.*;
 import com.example.reader.Reader;
 import com.example.csvparser.CSVParser;
+import io.grpc.protobuf.services.ProtoReflectionService;
 
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -21,7 +22,8 @@ public class App
         // Create a new server to listen on port 8080
         System.out.println("Server starting at port "+ args[0]);
         Server server = ServerBuilder.forPort(Integer.parseInt(args[0])).executor(Executors.newFixedThreadPool(100))
-                .addService(new HelloServiceI())
+                .addService(new HelloServiceI(Integer.parseInt(args[0])))
+                //.addService(ProtoReflectionService.newInstance())
                 .build();
 
         // Start the server
