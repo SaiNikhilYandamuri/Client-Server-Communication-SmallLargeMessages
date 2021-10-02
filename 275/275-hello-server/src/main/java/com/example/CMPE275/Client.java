@@ -62,7 +62,7 @@ public class Client {
                     errors.compareAndSet(null, new RuntimeException("Invalid Response"));
                 }
                 synchronized (result){
-                    result.getResponseList();
+                    System.out.println(result.getResponseList());
                 }
 
                 while(!responses.isDone()){
@@ -105,18 +105,20 @@ public class Client {
 //        }
 
         //Load Balancing Client
-        NameResolver.Factory nameResolverFactory = new MultiAddressNameResolverFactory(
-                new InetSocketAddress("localhost", 8080),
-                new InetSocketAddress("localhost", 8081),
-                new InetSocketAddress("localhost", 8082)
-        );
-
-        ManagedChannel channel = ManagedChannelBuilder.forTarget("service")
-                .nameResolverFactory(nameResolverFactory)
-                .defaultLoadBalancingPolicy("round_robin")
-                .usePlaintext()
-                .build();
-
+//        NameResolver.Factory nameResolverFactory = new MultiAddressNameResolverFactory(
+//                new InetSocketAddress("localhost", 8080),
+//                new InetSocketAddress("localhost", 8081),
+//                new InetSocketAddress("localhost", 8082)
+//        );
+//
+//        ManagedChannel channel = ManagedChannelBuilder.forTarget("service")
+//                .nameResolverFactory(nameResolverFactory)
+//                .defaultLoadBalancingPolicy("round_robin")
+//                .usePlaintext()
+//                .build();
+        ManagedChannel channel = ManagedChannelBuilder.forTarget("localhost:8080")
+                    .usePlaintext()
+                    .build();
 
 //        for(int j =0 ; j< stubs.size(); j++){
 //            System.out.println(stubs.get(j));
