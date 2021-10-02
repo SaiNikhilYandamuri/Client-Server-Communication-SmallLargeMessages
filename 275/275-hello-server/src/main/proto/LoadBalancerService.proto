@@ -1,0 +1,37 @@
+syntax = "proto3";
+package com.example.CMPE275;
+
+// Request payload
+message RequestData {
+  // Each message attribute is strongly typed.
+  // You also must assign a "tag" number.
+  // Each tag number is unique within the message.
+  string city = 1;
+  string date = 2;
+
+  // There are many more basics types, like Enum, Map
+  // See https://developers.google.com/protocol-buffers/docs/proto3
+  // for more information.
+}
+message ResponsesData {
+  repeated RequestData response = 1;
+}
+message ResponseData {
+  string id = 1;
+  string name = 2;
+  string mesonet = 3;
+}
+
+// Defining a Service, a Service can have multiple RPC operations
+//service GreetingService {
+//  // Define a RPC operation
+//  rpc greeting(RequestData) returns (ResponseData);
+//}
+//
+//service LargeMessageService {
+//  rpc largeMessage(RequestData) returns (ResponsesData);
+//}
+
+service LoadBalanceService {
+  rpc laodBalancer(RequestData) returns (ResponsesData);
+}

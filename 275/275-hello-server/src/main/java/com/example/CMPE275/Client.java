@@ -88,6 +88,8 @@ public class Client {
     public static void main( String[] args ) throws Exception
     {
 
+        /*
+
         //ArrayList<LargeMessageServiceGrpc.LargeMessageServiceFutureStub> stubs = new ArrayList<>(2);
         //ArrayList<LargeMessageServiceGrpc.LargeMessageServiceBlockingStub> stubs = new ArrayList<>(2);
 
@@ -134,6 +136,28 @@ public class Client {
         Instant finish = Instant.now();
         long endTime = System.currentTimeMillis();
         System.out.println(endTime-startTime);
-        System.out.println("****************************************************"+ Duration.between(start,finish).toMillis());
+        System.out.println("****************************************************"+ Duration.between(start,finish).toMillis());*/
+
+//        final ManagedChannel channel = ManagedChannelBuilder.forTarget("localhost:"+port)
+//                    .usePlaintext(true)
+//                    .build();
+//
+//
+//            LargeMessageServiceGrpc.LargeMessageServiceFutureStub stub = LargeMessageServiceGrpc.newFutureStub(channel);
+//            //LargeMessageServiceGrpc.LargeMessageServiceBlockingStub stub = LargeMessageServiceGrpc.newBlockingStub(channel);
+//            stubs.add(i,stub);
+        int port = 8083;
+        final ManagedChannel channel = ManagedChannelBuilder.forTarget("localhost:"+port)
+                   .usePlaintext()
+                    .build();
+        System.out.println();
+        LoadBalanceServiceGrpc.LoadBalanceServiceBlockingStub stub = LoadBalanceServiceGrpc.newBlockingStub(channel);
+        //GreetingServiceOuterClass.HelloRequest request = GreetingServiceOuterClass.HelloRequest.newBuilder().setCity("C7959").build();
+        //GreetingServiceOuterClass.Responses responses = stub.largeMessage(request);
+        LoadBalancerService.RequestData request= LoadBalancerService.RequestData.newBuilder().setCity("C7959").build();
+        //GreetingServiceOuterClass.HelloRequest request = GreetingServiceOuterClass.HelloRequest.newBuilder().setCity("C7959").build();
+        //GreetingServiceOuterClass.Responses responses = stub.laodBalancer(request);
+        LoadBalancerService.ResponsesData responsesData = stub.laodBalancer(request);
+        responsesData.getResponseList();
     }
 }
