@@ -26,14 +26,19 @@ public class HelloServiceI extends LargeMessageServiceGrpc.LargeMessageServiceIm
     public void largeMessage(GreetingServiceOuterClass.HelloRequest request,
                              StreamObserver<GreetingServiceOuterClass.Responses> responseObserver) {
         System.out.println(request);
-        String path = "C:\\Users\\nikhi\\OneDrive\\Desktop\\Fall'21\\275\\lab-g01\\";
+        String path = "C:\\275_lab1\\CMPE275Lab1\\275\\275-hello-server";
         String dataSource = null;
         if(portNumber==8080) {
-            dataSource =path+"reader\\catalog.csv";
+            System.out.println("operating on port 8080");
+            dataSource =path+"\\catalog.csv";
         }else if(portNumber==8081){
-            dataSource =path+"reader\\catalog-1.csv";
+            System.out.println("operating on port 8081");
+            dataSource =path+"\\catalog1.csv";
         }else if(portNumber==8082){
-            dataSource =path+"reader\\catalog-2.csv";
+            dataSource =path+"\\catalog2.csv";
+        }
+        else if(portNumber==8083){
+            dataSource =path+"\\catalog3.csv";
         }
 
             CSVParser csvParser = new CSVParser();

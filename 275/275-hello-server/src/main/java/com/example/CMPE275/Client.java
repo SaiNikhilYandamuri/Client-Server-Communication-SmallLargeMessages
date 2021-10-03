@@ -17,10 +17,13 @@ import java.util.concurrent.atomic.AtomicReference;
 import com.example.loadBalancing.MultiAddressNameResolverFactory;
 import com.google.common.util.concurrent.MoreExecutors;
 import org.checkerframework.checker.nullness.compatqual.NullableDecl;
+import org.apache.log4j.PropertyConfigurator;
+import org.apache.log4j.Logger;
 
 public class Client {
 
     private static AtomicLong rpcCount = new AtomicLong();
+    static final Logger logger = Logger.getLogger(Client.class);
 
     public static void printResult(ListenableFuture<GreetingServiceOuterClass.Responses> res)  {
         try {
@@ -32,15 +35,18 @@ public class Client {
         }
     }
 
-    public static void createClient(LargeMessageServiceGrpc.LargeMessageServiceBlockingStub stub, AtomicReference<Throwable> errors){
+    public static void createClient(LargeMessageServiceGrpc.LargeMessageServiceBlockingStub stub, AtomicReference<Throwable> errors, long st,int i){
+        PropertyConfigurator.configure("log4j.properties");
         GreetingServiceOuterClass.HelloRequest request = GreetingServiceOuterClass.HelloRequest.newBuilder().setCity("C7959").build();
         GreetingServiceOuterClass.Responses responses = stub.largeMessage(request);
         responses.getResponseList();
+        long endTime = System.currentTimeMillis();
+//                System.out.println(endTime);
+        logger.debug(endTime-st+"**************"+i);
     }
-    public static void createClient(LargeMessageServiceGrpc.LargeMessageServiceFutureStub stub,AtomicReference<Throwable> errors) throws InterruptedException {
-
-
-
+    public static void createClient(LargeMessageServiceGrpc.LargeMessageServiceFutureStub stub,AtomicReference<Throwable> errors,long st,int i) throws InterruptedException {
+        logger.debug("Hello World!");
+        //System.out.println(i);
         GreetingServiceOuterClass.HelloRequest request = GreetingServiceOuterClass.HelloRequest.newBuilder().setCity("C7959").build();
         ListenableFuture<GreetingServiceOuterClass.Responses> responses = stub.largeMessage(request);
         responses.addListener(()-> new Runnable() {
@@ -58,16 +64,22 @@ public class Client {
             @Override
             public void onSuccess(@NullableDecl GreetingServiceOuterClass.Responses result) {
                 System.out.println("SUccess");
+                //System.out.println(i);
+                //Configure logger
+                PropertyConfigurator.configure("log4j.properties");
+                logger.debug("Hello World!");
                 if(!result.equals(GreetingServiceOuterClass.Responses.getDefaultInstance())){
                     errors.compareAndSet(null, new RuntimeException("Invalid Response"));
                 }
                 synchronized (result){
                     result.getResponseList();
                 }
+                long endTime = System.currentTimeMillis();
+//                System.out.println(endTime);
+                logger.debug(endTime-st+"********************"+i);
+                //logger.debug(i);
 
-                while(!responses.isDone()){
-                    System.out.println(".....wait");
-                }
+
 
             }
 
@@ -77,12 +89,12 @@ public class Client {
                 System.out.println("Inside Failure");
             }
         }, MoreExecutors.directExecutor());
-
-        while(!responses.isDone()){
-            //System.out.println("waiting...");
-//            Thread.sleep(2000);
-
-        }
+       // System.out.println(i);
+//        while(!responses.isDone() && i == 9){
+//            //System.out.println("waiting...");
+////            Thread.sleep(2000);
+//
+//        }
     }
 
     public static void main( String[] args ) throws Exception
@@ -108,7 +120,8 @@ public class Client {
         NameResolver.Factory nameResolverFactory = new MultiAddressNameResolverFactory(
                 new InetSocketAddress("localhost", 8080),
                 new InetSocketAddress("localhost", 8081),
-                new InetSocketAddress("localhost", 8082)
+                new InetSocketAddress("localhost", 8082),
+                new InetSocketAddress("localhost", 8083)
         );
 
         ManagedChannel channel = ManagedChannelBuilder.forTarget("service")
@@ -122,18 +135,33 @@ public class Client {
 //            System.out.println(stubs.get(j));
 //        }
         LargeMessageServiceGrpc.LargeMessageServiceFutureStub stub = LargeMessageServiceGrpc.newFutureStub(channel);
-        // LargeMessageServiceGrpc.LargeMessageServiceBlockingStub stub = LargeMessageServiceGrpc.newBlockingStub(channel);
+        //LargeMessageServiceGrpc.LargeMessageServiceBlockingStub stub = LargeMessageServiceGrpc.newBlockingStub(channel);
         Instant start = Instant.now();
-        long startTime = System.currentTimeMillis();
+        long startTime = 0;
+        //long endTime = System.currentTimeMillis();
+
+        //logger.debug(startTime);
+
+        int count = 0;
         for(int i=0;i<10;i++){//System.out.println(i%2);
             //System.out.println(stubs.get(i%2));
             //LargeMessageServiceGrpc.LargeMessageServiceFutureStub stub = stubs.get(i%2);
             //LargeMessageServiceGrpc.LargeMessageServiceBlockingStub stub = stubs.get(0);
-            createClient(stub,errors);
+            startTime = System.currentTimeMillis();
+
+            createClient(stub,errors, startTime,i);
+            count += 1;
         }
         Instant finish = Instant.now();
         long endTime = System.currentTimeMillis();
         System.out.println(endTime-startTime);
+
+
         System.out.println("****************************************************"+ Duration.between(start,finish).toMillis());
+        while(true){
+            System.out.println("****************************************************"+ Duration.between(start,finish).toMillis()+"***"+ count);
+            Thread.sleep(2000);
+        }
+
     }
 }
