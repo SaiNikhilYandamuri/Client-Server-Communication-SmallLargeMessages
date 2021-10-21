@@ -12,9 +12,7 @@ import java.util.Set;
 
 public class Reader {
 
-    public Reader(){
 
-    }
 
     public final void readFile(String[] args){
 
@@ -62,6 +60,8 @@ public class Reader {
                     for (Station s : stations)
                         cat.addStation(s);
                 }
+                // set a bunch of variables
+
 
                 List<MesonetData> data = rawReader.extract(dataSource, startDate , endDate, region, stationIDs);
                 System.out.println("processed " + data.size() + " entries");

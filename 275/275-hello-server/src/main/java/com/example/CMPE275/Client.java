@@ -52,7 +52,7 @@ public class Client {
         responses.addListener(()-> new Runnable() {
             public void run() {
                 try {
-                    System.out.println(responses.get());
+                    responses.get();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {

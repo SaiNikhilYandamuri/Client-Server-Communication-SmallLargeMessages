@@ -100,9 +100,9 @@ public class MesonetReader {
      *
      * @param f
      * @paramupperLeftLat
-     * @param upperLeftLon
-     * @param lowerRightLat
-     * @param lowerRightLon
+     * @param //upperLeftLon
+     * @param //lowerRightLat
+     * @param //lowerRightLon
      * @return
      * @throws Exception
      */
@@ -140,14 +140,14 @@ public class MesonetReader {
                 dataProvider[n] = String.valueOf(tmp[n]).trim();
 
             String[] skyCvr = null;
-            try {
-                char[][][] tmp2 = (char[][][]) nf.findVariable("skyCvr").read().copyToNDJavaArray();
-                skyCvr = new String[tmp2.length];
-                for (int n = 0; n < tmp2.length; n++)
-                    skyCvr[n] = String.valueOf(tmp2[n][0]).trim();
-            } catch (Exception ex) {
-                ; // now skycover available
-            }
+//            try {
+//                char[][][] tmp2 = (char[][][]) nf.findVariable("skyCvr").read().copyToNDJavaArray();
+//                skyCvr = new String[tmp2.length];
+//                for (int n = 0; n < tmp2.length; n++)
+//                    skyCvr[n] = String.valueOf(tmp2[n][0]).trim();
+//            } catch (Exception ex) {
+//                ; // now skycover available
+//            }
 
             // pressure as pascal, spd as m/s, temp as K
             float[] lat = (float[]) nf.findVariable("latitude").read().copyTo1DJavaArray();
@@ -155,25 +155,25 @@ public class MesonetReader {
             float[] elev = (float[]) nf.findVariable("elevation").read().copyTo1DJavaArray();
             int[] wmo = (int[]) nf.findVariable("numericWMOid").read().copyTo1DJavaArray();
             double[] obstime = (double[]) nf.findVariable("observationTime").read().copyTo1DJavaArray();
-            double[] rcvtime = (double[]) nf.findVariable("receivedTime").read().copyTo1DJavaArray();
-            float[] pres = (float[]) nf.findVariable("stationPressure").read().copyTo1DJavaArray();
-            float[] altimeter = (float[]) nf.findVariable("altimeter").read().copyTo1DJavaArray();
-            float[] seaPres = (float[]) nf.findVariable("seaLevelPressure").read().copyTo1DJavaArray();
+//            double[] rcvtime = (double[]) nf.findVariable("receivedTime").read().copyTo1DJavaArray();
+//            float[] pres = (float[]) nf.findVariable("stationPressure").read().copyTo1DJavaArray();
+//            float[] altimeter = (float[]) nf.findVariable("altimeter").read().copyTo1DJavaArray();
+//            float[] seaPres = (float[]) nf.findVariable("seaLevelPressure").read().copyTo1DJavaArray();
             float[] temp = (float[]) nf.findVariable("temperature").read().copyTo1DJavaArray();
-            char[] tempQC = (char[]) nf.findVariable("temperatureDD").read().copyTo1DJavaArray();
-            float[] dewpt = (float[]) nf.findVariable("dewpoint").read().copyTo1DJavaArray();
-            float[] relHum = (float[]) nf.findVariable("relHumidity").read().copyTo1DJavaArray();
-            float[] windspd = (float[]) nf.findVariable("windSpeed").read().copyTo1DJavaArray();
-            float[] windgust = (float[]) nf.findVariable("windGust").read().copyTo1DJavaArray();
-            char[] windspdQC = (char[]) nf.findVariable("windSpeedDD").read().copyTo1DJavaArray();
-            float[] winddir = (float[]) nf.findVariable("windDir").read().copyTo1DJavaArray();
-            float[] visibility = (float[]) nf.findVariable("visibility").read().copyTo1DJavaArray();
-            float[] rawPrecip = (float[]) nf.findVariable("rawPrecip").read().copyTo1DJavaArray();
-            float[] precipAccum = (float[]) nf.findVariable("precipAccum").read().copyTo1DJavaArray();
-            float[] precipRate = (float[]) nf.findVariable("precipRate").read().copyTo1DJavaArray();
-            short[][] precipType = (short[][]) nf.findVariable("precipType").read().copyToNDJavaArray();
-            short[][] precipIntensity = (short[][]) nf.findVariable("precipIntensity").read().copyToNDJavaArray();
-            float[] solarRadiation = (float[]) nf.findVariable("solarRadiation").read().copyTo1DJavaArray();
+//            char[] tempQC = (char[]) nf.findVariable("temperatureDD").read().copyTo1DJavaArray();
+//            float[] dewpt = (float[]) nf.findVariable("dewpoint").read().copyTo1DJavaArray();
+//            float[] relHum = (float[]) nf.findVariable("relHumidity").read().copyTo1DJavaArray();
+//            float[] windspd = (float[]) nf.findVariable("windSpeed").read().copyTo1DJavaArray();
+//            float[] windgust = (float[]) nf.findVariable("windGust").read().copyTo1DJavaArray();
+//            char[] windspdQC = (char[]) nf.findVariable("windSpeedDD").read().copyTo1DJavaArray();
+//            float[] winddir = (float[]) nf.findVariable("windDir").read().copyTo1DJavaArray();
+//            float[] visibility = (float[]) nf.findVariable("visibility").read().copyTo1DJavaArray();
+//            float[] rawPrecip = (float[]) nf.findVariable("rawPrecip").read().copyTo1DJavaArray();
+//            float[] precipAccum = (float[]) nf.findVariable("precipAccum").read().copyTo1DJavaArray();
+//            float[] precipRate = (float[]) nf.findVariable("precipRate").read().copyTo1DJavaArray();
+//            short[][] precipType = (short[][]) nf.findVariable("precipType").read().copyToNDJavaArray();
+//            short[][] precipIntensity = (short[][]) nf.findVariable("precipIntensity").read().copyToNDJavaArray();
+//            float[] solarRadiation = (float[]) nf.findVariable("solarRadiation").read().copyTo1DJavaArray();
 
             float[] seaSurfaceTemp = null;
             try {
@@ -196,12 +196,12 @@ public class MesonetReader {
                 ; // no soil temp available
             }
 
-            float[][] skyCovLayerBase = null;
-            try {
-                skyCovLayerBase = (float[][]) nf.findVariable("skyCovLayerBase").read().copyToNDJavaArray();
-            } catch (Exception ex) {
-                ; // now skycover available
-            }
+//            float[][] skyCovLayerBase = null;
+//            try {
+//                skyCovLayerBase = (float[][]) nf.findVariable("skyCovLayerBase").read().copyToNDJavaArray();
+//            } catch (Exception ex) {
+//                ; // now skycover available
+//            }
 
             for (int r = 0; r < lat.length; r++) {
                 // invalid name/ID
@@ -242,80 +242,80 @@ public class MesonetReader {
                 // the correct field
                 record.setDataProvider(dataProvider[r]);
 
-                if (wmo[r] != MesonetData.missingValue && wmo[r] != -2147483647)
-                    record.setWmoId(wmo[r]);
+//                if (wmo[r] != MesonetData.missingValue && wmo[r] != -2147483647)
+//                    record.setWmoId(wmo[r]);
 
                 if (skyCvr != null)
                     record.setSkyCover(skyCvr[r]);
 
                 // validated above
                 record.setLatitude(lat[r]);
-                record.setLongitude(lon[r]);
-                record.setTimeObs(obstime[r]);
+//                record.setLongitude(lon[r]);
+//                record.setTimeObs(obstime[r]);
 
-                if (elev[r] != MesonetData.missingValue && elev[r] != MesonetData.fillValue)
-                    record.setElevation((double) elev[r]);
+//                if (elev[r] != MesonetData.missingValue && elev[r] != MesonetData.fillValue)
+//                    record.setElevation((double) elev[r]);
 
-                if (rcvtime[r] != MesonetData.missingValue && rcvtime[r] != MesonetData.fillValue)
-                    record.setTimeReceived(rcvtime[r]);
-
-                if (ObsQCRange.checkStationPressure((double) pres[r]))
-                    record.setStationPressure((double) pres[r]);
-
-                if (ObsQCRange.checkAltimeter((double) altimeter[r]))
-                    record.setAltimeter((double) altimeter[r]);
-
-                if (ObsQCRange.checkSeaLevelPressure((double) seaPres[r]))
-                    record.setSeaLevelPress((double) seaPres[r]);
-
+//                if (rcvtime[r] != MesonetData.missingValue && rcvtime[r] != MesonetData.fillValue)
+//                    record.setTimeReceived(rcvtime[r]);
+//
+//                if (ObsQCRange.checkStationPressure((double) pres[r]))
+//                    record.setStationPressure((double) pres[r]);
+//
+//                if (ObsQCRange.checkAltimeter((double) altimeter[r]))
+//                    record.setAltimeter((double) altimeter[r]);
+//
+//                if (ObsQCRange.checkSeaLevelPressure((double) seaPres[r]))
+//                    record.setSeaLevelPress((double) seaPres[r]);
+//
                 if (ObsQCRange.checkTemperature((double) temp[r]))
                     record.setTemperature((double) temp[r]);
-
-                record.setTemperatureQC(String.valueOf(tempQC[r]));
-
-                if (ObsQCRange.checkDewpoint((double) dewpt[r]))
-                    record.setDewpoint((double) dewpt[r]);
-
-                if (ObsQCRange.checkRelativeHumidity((double) relHum[r]))
-                    record.setRelHumidity((double) relHum[r]);
-
-                if (ObsQCRange.checkWindDirection((double) winddir[r]))
-                    record.setWindDir((double) winddir[r]);
-
-                if (ObsQCRange.checkWindSpeed((double) windspd[r]))
-                    record.setWindSpeed((double) windspd[r]);
-
-                record.setWindSpeedQC(String.valueOf(windspdQC[r]));
-
-                if (ObsQCRange.checkWindGust((double) windgust[r]))
-                    record.setWindGust((double) windgust[r]);
-
-                if (ObsQCRange.checkVisibility((double) visibility[r]))
-                    record.setVisibility((double) visibility[r]);
-
-                if (ObsQCRange.checkPrecipRate((double) rawPrecip[r]))
-                    record.setPrecip((double) rawPrecip[r]);
-
-                if (ObsQCRange.checkPrecipRate((double) precipAccum[r]))
-                    record.setPrecipAccum((double) precipAccum[r]);
-
-                // cannot use range checks: they are just the height (implies
-                // per hr)
-                if (precipRate[r] != MesonetData.missingValue && precipRate[r] != MesonetData.fillValue) {
-                    record.setPrecipRate((double) precipRate[r]);
-                }
-
-                // TODO should do something with the array
-                if (precipType[r][0] != MesonetData.missingValue && precipType[r][0] != -32767)
-                    record.setPrecipType(precipType[r][0]);
-
-                // TODO should do something with the array
-                if (precipIntensity[r][0] != MesonetData.missingValue && precipIntensity[r][0] != -32767)
-                    record.setPrecipIntensity(precipIntensity[r][0]);
-
-                if (solarRadiation[r] != MesonetData.missingValue
-                        && solarRadiation[r] != MesonetData.fillValue)
-                    record.setSolarRadiation(solarRadiation[r]);
+//
+//                record.setTemperatureQC(String.valueOf(tempQC[r]));
+//
+//                if (ObsQCRange.checkDewpoint((double) dewpt[r]))
+//                    record.setDewpoint((double) dewpt[r]);
+//
+//                if (ObsQCRange.checkRelativeHumidity((double) relHum[r]))
+//                    record.setRelHumidity((double) relHum[r]);
+//
+//                if (ObsQCRange.checkWindDirection((double) winddir[r]))
+//                    record.setWindDir((double) winddir[r]);
+//
+//                if (ObsQCRange.checkWindSpeed((double) windspd[r]))
+//                    record.setWindSpeed((double) windspd[r]);
+//
+//                record.setWindSpeedQC(String.valueOf(windspdQC[r]));
+//
+//                if (ObsQCRange.checkWindGust((double) windgust[r]))
+//                    record.setWindGust((double) windgust[r]);
+//
+//                if (ObsQCRange.checkVisibility((double) visibility[r]))
+//                    record.setVisibility((double) visibility[r]);
+//
+//                if (ObsQCRange.checkPrecipRate((double) rawPrecip[r]))
+//                    record.setPrecip((double) rawPrecip[r]);
+//
+//                if (ObsQCRange.checkPrecipRate((double) precipAccum[r]))
+//                    record.setPrecipAccum((double) precipAccum[r]);
+//
+//                // cannot use range checks: they are just the height (implies
+//                // per hr)
+//                if (precipRate[r] != MesonetData.missingValue && precipRate[r] != MesonetData.fillValue) {
+//                    record.setPrecipRate((double) precipRate[r]);
+//                }
+//
+//                // TODO should do something with the array
+//                if (precipType[r][0] != MesonetData.missingValue && precipType[r][0] != -32767)
+//                    record.setPrecipType(precipType[r][0]);
+//
+//                // TODO should do something with the array
+//                if (precipIntensity[r][0] != MesonetData.missingValue && precipIntensity[r][0] != -32767)
+//                    record.setPrecipIntensity(precipIntensity[r][0]);
+//
+//                if (solarRadiation[r] != MesonetData.missingValue
+//                        && solarRadiation[r] != MesonetData.fillValue)
+//                    record.setSolarRadiation(solarRadiation[r]);
 
                 if (seaSurfaceTemp != null) {
                     if (ObsQCRange.checkSeaTemperature((double) seaSurfaceTemp[r]))
@@ -332,10 +332,10 @@ public class MesonetReader {
                         record.setTempSoil((double) soilTemperature[r]);
                 }
 
-                // TODO should do something with the array
-                if (skyCovLayerBase != null && skyCovLayerBase[r][0] != MesonetData.missingValue
-                        && skyCovLayerBase[r][0] != MesonetData.fillValue)
-                    record.setSkyLayerBase((double) skyCovLayerBase[r][0]);
+//                // TODO should do something with the array
+//                if (skyCovLayerBase != null && skyCovLayerBase[r][0] != MesonetData.missingValue
+//                        && skyCovLayerBase[r][0] != MesonetData.fillValue)
+//                    record.setSkyLayerBase((double) skyCovLayerBase[r][0]);
 
                 // Reject the collection agency arlfrd. This is duplicated in
                 // the INEL collection
@@ -480,10 +480,10 @@ public class MesonetReader {
      * spatial query
      *
      * @param f
-     * @param upperLeftLat
-     * @param upperLeftLon
-     * @param lowerRightLat
-     * @param lowerRightLon
+     * @param //upperLeftLat
+     * @param //upperLeftLon
+     * @param //lowerRightLat
+     * @param //lowerRightLon
      * @return
      */
     public List<MesonetData> read(File f, Date startDate, Date endDate, Rectangle region, Set<String> stationIds) {
